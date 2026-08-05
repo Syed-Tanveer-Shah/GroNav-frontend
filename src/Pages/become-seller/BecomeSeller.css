@@ -1,0 +1,717 @@
+/* ============================================
+   BECOME A SELLER — CartGo Design System
+   Primary Green  : #629D23
+   Hover Green    : #51821d
+   Light Green Bg : #f0f7e6
+   Card Radius    : 8px
+   Shadow         : 0 4px 20px rgba(0,0,0,0.1)
+   ============================================ */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Announcement Bar ───────────────────────── */
+.bs-announcement-bar {
+  background: #629D23;
+  padding: 10px 0;
+  text-align: center;
+}
+.bs-announcement-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.bs-announcement-bar p {
+  margin: 0;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  flex: 1;
+}
+.bs-ann-links {
+  display: flex;
+  gap: 20px;
+}
+.bs-ann-links a {
+  color: #fff;
+  font-size: 13px;
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+.bs-ann-links a:hover { opacity: 1; text-decoration: underline; }
+
+/* ── Hero Section ───────────────────────────── */
+.bs-hero {
+  background: linear-gradient(135deg, #2d5a0e 0%, #3d7a14 50%, #629D23 100%);
+  padding: 80px 0 70px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.bs-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.bs-hero-inner {
+  position: relative;
+  animation: fadeInUp 0.7s ease both;
+}
+.bs-hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 18px;
+  border-radius: 50px;
+  margin-bottom: 22px;
+  backdrop-filter: blur(4px);
+}
+.bs-hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 18px;
+  line-height: 1.2;
+}
+.bs-hero h1 span { color: #a8e063; }
+.bs-hero-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,0.85);
+  max-width: 620px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+.bs-hero-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.bs-btn-primary {
+  background: #fff;
+  color: #629D23;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 8px;
+}
+.bs-btn-primary:hover {
+  background: #629D23;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.bs-btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.6);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.bs-btn-outline:hover {
+  border-color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+.bs-hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.bs-stat {
+  text-align: center;
+  animation: fadeInUp 0.7s ease 0.2s both;
+}
+.bs-stat-num {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+}
+.bs-stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+}
+
+/* ── Step Bar ───────────────────────────────── */
+.bs-stepbar {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 18px 0;
+}
+.bs-stepbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.bs-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bs-step-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  border: 2px solid #ddd;
+  color: #aaa;
+  background: #fff;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.bs-step-circle.active {
+  background: #629D23;
+  border-color: #629D23;
+  color: #fff;
+}
+.bs-step-circle.done {
+  background: #629D23;
+  border-color: #629D23;
+  color: #fff;
+}
+.bs-step-label {
+  font-size: 14px;
+  color: #aaa;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.bs-step-label.active { color: #629D23; font-weight: 700; }
+.bs-step-label.done   { color: #629D23; }
+.bs-step-connector {
+  width: 60px;
+  height: 2px;
+  background: #eee;
+  margin: 0 4px;
+  transition: background 0.3s;
+}
+.bs-step-connector.done { background: #629D23; }
+
+/* ── Benefits Section ───────────────────────── */
+.bs-benefits {
+  padding: 70px 0;
+  background: #fff;
+}
+.bs-section-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1F1F25;
+  margin-bottom: 10px;
+}
+.bs-section-title span { color: #629D23; }
+.bs-section-sub {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 48px;
+}
+.bs-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+/* Exact same card as homepage single-feature-area */
+.bs-benefit-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  cursor: default;
+}
+.bs-benefit-card:hover {
+  box-shadow: 0 8px 30px rgba(98,157,35,0.15);
+  transform: translateY(-4px);
+  border-color: #629D23;
+}
+.bs-benefit-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f0f7e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 26px;
+  color: #629D23;
+  transition: background 0.3s;
+}
+.bs-benefit-card:hover .bs-benefit-icon {
+  background: #629D23;
+  color: #fff;
+}
+.bs-benefit-card h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1F1F25;
+  margin-bottom: 10px;
+}
+.bs-benefit-card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── How It Works ───────────────────────────── */
+.bs-how {
+  background: #f0f7e6;
+  padding: 70px 0;
+}
+.bs-steps-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  margin-top: 48px;
+}
+.bs-how-step {
+  text-align: center;
+  flex: 1;
+  max-width: 260px;
+}
+.bs-how-num {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #629D23;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  box-shadow: 0 4px 16px rgba(98,157,35,0.3);
+}
+.bs-how-step h4 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1F1F25;
+  margin-bottom: 8px;
+}
+.bs-how-step p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+.bs-how-arrow {
+  font-size: 28px;
+  color: #629D23;
+  margin: 0 8px;
+  padding-top: 14px;
+  opacity: 0.5;
+}
+
+/* ── Store Type Selection ───────────────────── */
+.bs-store-type {
+  padding: 70px 0;
+  background: #fff;
+}
+.bs-store-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+}
+/* Same card style as homepage */
+.bs-store-card {
+  border: 2px solid #eee;
+  border-radius: 8px;
+  padding: 44px 36px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.bs-store-card:hover {
+  border-color: #629D23;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(98,157,35,0.18);
+}
+.bs-store-card-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #f0f7e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-size: 36px;
+  color: #629D23;
+  transition: all 0.3s;
+}
+.bs-store-card:hover .bs-store-card-icon {
+  background: #629D23;
+  color: #fff;
+}
+.bs-store-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1F1F25;
+  margin-bottom: 12px;
+}
+.bs-store-card p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+.bs-store-card .rts-btn {
+  display: inline-block;
+  background: #629D23;
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.bs-store-card .rts-btn:hover { background: #51821d; }
+
+/* ── Testimonials ───────────────────────────── */
+.bs-testimonials {
+  background: #f0f7e6;
+  padding: 70px 0;
+}
+.bs-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.bs-testimonial-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  transition: transform 0.3s;
+}
+.bs-testimonial-card:hover { transform: translateY(-4px); }
+.bs-stars { color: #629D23; font-size: 16px; margin-bottom: 14px; }
+.bs-testimonial-card blockquote {
+  margin: 0 0 20px;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.65;
+  font-style: italic;
+}
+.bs-testimonial-footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.bs-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #629D23;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.bs-testimonial-info strong {
+  display: block;
+  font-size: 15px;
+  color: #1F1F25;
+}
+.bs-testimonial-info span {
+  font-size: 13px;
+  color: #999;
+}
+
+/* ── Bottom CTA ─────────────────────────────── */
+.bs-cta {
+  background: linear-gradient(135deg, #2d5a0e 0%, #629D23 100%);
+  padding: 70px 0;
+  text-align: center;
+}
+.bs-cta h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 14px;
+}
+.bs-cta p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 32px;
+}
+
+/* ── Registration Forms ─────────────────────── */
+.bs-form-section {
+  padding: 60px 0;
+  background: #fff;
+  animation: fadeIn 0.4s ease;
+}
+.bs-form-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 44px 48px;
+}
+.bs-form-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1F1F25;
+  margin-bottom: 6px;
+}
+.bs-form-subtitle {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 32px;
+}
+.bs-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.bs-form-grid .input-wrapper.full {
+  grid-column: 1 / -1;
+}
+/* Reusing exact existing .input-wrapper styles from Registration.jsx pattern */
+.bs-form-wrapper .input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bs-form-wrapper .input-wrapper label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+.bs-form-wrapper .input-wrapper input,
+.bs-form-wrapper .input-wrapper select,
+.bs-form-wrapper .input-wrapper textarea {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+}
+.bs-form-wrapper .input-wrapper input:focus,
+.bs-form-wrapper .input-wrapper select:focus,
+.bs-form-wrapper .input-wrapper textarea:focus {
+  border-color: #629D23;
+  box-shadow: 0 0 0 3px rgba(98,157,35,0.12);
+}
+.bs-form-wrapper .input-wrapper input.error,
+.bs-form-wrapper .input-wrapper select.error,
+.bs-form-wrapper .input-wrapper textarea.error {
+  border-color: #e53e3e;
+}
+.bs-field-error {
+  font-size: 12px;
+  color: #e53e3e;
+  margin-top: 2px;
+}
+.bs-form-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 28px;
+  align-items: center;
+}
+.bs-back-btn {
+  background: transparent;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+  white-space: nowrap;
+}
+.bs-back-btn:hover {
+  border-color: #629D23;
+  color: #629D23;
+}
+.bs-submit-btn {
+  flex: 1;
+  background: #629D23;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.bs-submit-btn:hover:not(:disabled) { background: #51821d; }
+.bs-submit-btn:disabled { opacity: 0.65; cursor: not-allowed; }
+.bs-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 991px) {
+  .bs-benefits-grid { grid-template-columns: repeat(2, 1fr); }
+  .bs-testimonials-grid { grid-template-columns: 1fr 1fr; }
+  .bs-store-cards { grid-template-columns: 1fr; }
+  .bs-hero h1 { font-size: 30px; }
+  .bs-how-arrow { display: none; }
+  .bs-steps-row { flex-direction: column; align-items: center; gap: 32px; }
+}
+@media (max-width: 600px) {
+  .bs-benefits-grid { grid-template-columns: 1fr; }
+  .bs-testimonials-grid { grid-template-columns: 1fr; }
+  .bs-form-grid { grid-template-columns: 1fr; }
+  .bs-form-wrapper { padding: 28px 20px; }
+  .bs-hero-stats { gap: 20px; }
+  .bs-announcement-bar .container { flex-direction: column; }
+}
+/* ── Login Modal ────────────────────────────── */
+.bs-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+.bs-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 450px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: fadeInUp 0.4s ease;
+}
+.bs-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.bs-modal-close:hover { color: #333; }
+.bs-modal h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1F1F25;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.bs-modal p {
+  color: #666;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 15px;
+}
+.bs-modal-error {
+  background: #fff5f5;
+  color: #e53e3e;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border: 1px solid #fed7d7;
+  text-align: center;
+}
+.bs-modal .input-wrapper { margin-bottom: 20px; }
+.bs-forgot-link {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  color: #629D23;
+  text-decoration: none;
+  margin-top: -12px;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.bs-forgot-link:hover { text-decoration: underline; }
+.bs-login-btn {
+  width: 100%;
+  background: #629D23;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.bs-login-btn:hover { background: #51821d; }
