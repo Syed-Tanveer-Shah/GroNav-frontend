@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Product from "./include/Product";
 import api from "../Utils/Axios";
 
@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
 function ProductList() {
+    // eslint-disable-next-line no-unused-vars
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [stores, setStores] = useState([]);

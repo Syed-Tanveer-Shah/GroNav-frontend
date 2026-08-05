@@ -39,6 +39,7 @@ function Registration() {
         }
 
         try {
+            // eslint-disable-next-line no-unused-vars
             const response = await api.post("/auth/registration/", formData);
             toast.success("Registration successful! Please login.");
             setSuccess("Registration successful! Please login.");

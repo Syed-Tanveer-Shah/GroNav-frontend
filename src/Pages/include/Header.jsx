@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Store } from "../../Utils/Store";
-import { Currencies } from "../../Utils/Data";
 import api from "../../Utils/Axios";
-import { toast } from 'react-toastify';
 
 
 
@@ -14,6 +12,7 @@ function Header() {
     const navigate = useNavigate()
     const location = useLocation()
     const [searchInput, setSearchInput] = useState("")
+    // eslint-disable-next-line no-unused-vars
     const [categories, setCategories] = useState([])
     const [selectedCategory, setSelectedCategory] = useState("")
     const [selectedPriceRange, setSelectedPriceRange] = useState("")
@@ -27,6 +26,7 @@ function Header() {
 
     const token = localStorage.getItem('token');
     const userType = localStorage.getItem('user_type');
+    // eslint-disable-next-line no-unused-vars
     const userName = localStorage.getItem('user_name');
     const displayName = localStorage.getItem('user_name')?.split(' ')[0] || localStorage.getItem('user_name')?.split('@')[0] || 'User';
     const isBuyer = token && userType !== 'seller';
@@ -91,6 +91,7 @@ function Header() {
         window.location.reload();
     };
 
+    // eslint-disable-next-line no-unused-vars
     const handleLogout = () => {
         handleSignOut();
     };
@@ -122,6 +123,7 @@ function Header() {
         }
     }, [location.search]);
 
+    // eslint-disable-next-line no-unused-vars
     const handleHeaderSearch = (event) => {
         event.preventDefault();
         const trimmed = searchInput.trim();

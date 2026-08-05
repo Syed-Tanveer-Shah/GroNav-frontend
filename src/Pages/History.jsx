@@ -1,13 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Store } from "../Utils/Store";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import api from "../Utils/Axios"; // Import Axios instance
 
 function History() {
-    const { state, dispatch } = useContext(Store);
-    const { Cart, UserInfo } = state;  
-    const navigate = useNavigate();
     const [products, setProducts] = useState(null); 
     const [error, setError] = useState(null);
 

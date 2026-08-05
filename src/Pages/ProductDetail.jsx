@@ -11,6 +11,7 @@ export default function ProductDetail() {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
+  // eslint-disable-next-line no-unused-vars
   const [selectedImage, setSelectedImage] = useState(0)
   const [reviews, setReviews] = useState([])
   const [newReview, setNewReview] = useState({ rating: 5, comment: '' })

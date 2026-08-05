@@ -10,12 +10,10 @@ import HeroSearch from "./include/HeroSearch";
 
 
 function Home() {
-    const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [discountProducts, setDiscountProducts] = useState([]);
     const [topProducts, setTopProducts] = useState([]);
-    const { state, convertPrice } = useContext(Store);
-    const { Currency } = state;
+    const { convertPrice } = useContext(Store);
     const navigate = useNavigate();
 
 
@@ -27,7 +25,6 @@ function Home() {
  
                  const allProducts = response.data?.results || response.data || [];
  
-                 setProducts(allProducts);
                  setFilteredProducts(allProducts.filter((product) => product.featured_product === true));
                  setDiscountProducts(allProducts.filter((product) => product.discount_active === true));
                 const latestProducts = allProducts

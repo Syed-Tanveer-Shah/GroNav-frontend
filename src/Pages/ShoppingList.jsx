@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function ShoppingList() {
     const { state, dispatch } = useContext(Store);
-    const { Cart, UserInfo, Currency } = state;  // Get logged-in user info from Store
-    const currentCurrency = Currency || { code: "USD", symbol: "$", rate: 1.0 };
+    const { Cart } = state;  // Get logged-in user info from Store
     const navigate = useNavigate();
     const [popupProductId, setPopupProductId] = useState(null); // Track the product for which the popup is shown
 

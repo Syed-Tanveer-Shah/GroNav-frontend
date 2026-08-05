@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../Utils/Axios";
 import { Store } from "../Utils/Store"
-import { toast } from "react-toastify";
 function Login() {
     const { dispatch } = useContext(Store) || { dispatch: () => {} };
 
@@ -11,6 +10,7 @@ function Login() {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    // eslint-disable-next-line no-unused-vars
     const [success, setSuccess] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
 

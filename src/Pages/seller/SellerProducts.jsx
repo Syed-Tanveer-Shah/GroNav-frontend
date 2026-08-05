@@ -8,6 +8,7 @@ import { useTheme } from '../../context/ThemeContext';
 const G = '#6aaa00';
 const EMPTY_FORM = { name: '', category: '', price: '', discount_percentage: '', stock: '', stock_alert_threshold: '5', description: '', expiry_date: '', featured_product: false, image: null };
 
+// eslint-disable-next-line no-unused-vars
 function inp(style) { return { width: '100%', padding: '10px 12px', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '14px', outline: 'none', boxSizing: 'border-box', ...style }; }
 
 function Modal({ title, onClose, children, isDark, cardBg, textColor, borderColor }) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchSellerOverview, toggleStore } from '../../services/api';
 import { useTheme } from '../../context/ThemeContext';

@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Store } from '../Utils/Store'
 import api from '../Utils/Axios'
 import Product from './include/Product'
 import { toast } from 'react-toastify'
@@ -9,7 +8,6 @@ import { useAuth } from '../hooks/useAuth'
 
 export default function StoreDetail() {
   const { storeId } = useParams()
-  const { convertPrice } = useContext(Store)
   const [store, setStore] = useState(null)
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../Utils/Axios";
 import CustomDropdown from "./CustomDropdown";
-import { FaMapMarkerAlt, FaTag, FaMoneyBillWave, FaSearch, FaChevronRight, FaStar, FaSpinner } from "react-icons/fa";
+import { FaMapMarkerAlt, FaTag, FaMoneyBillWave, FaSearch, FaChevronRight, FaSpinner } from "react-icons/fa";
 import { Typography } from "antd";
 
 
 const HeroSearch = () => {
+  // eslint-disable-next-line no-unused-vars
   const [search, setSearch] = useState("");
   const [city, setCity] = useState("");
   const [minPrice, setMinPrice] = useState("");
@@ -15,7 +16,9 @@ const HeroSearch = () => {
   
   // Advanced Filters
   const [showAdvanced, setShowAdvanced] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [brand, setBrand] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [rating, setRating] = useState(0);
   const [inStock, setInStock] = useState(false);
 

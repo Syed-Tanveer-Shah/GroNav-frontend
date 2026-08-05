@@ -13,7 +13,7 @@ function Product({ item: product }) {
     const [loadingStore, setLoadingStore] = useState(false);
     const [showLoginPrompt, setShowLoginPrompt] = useState(false);
     const { state, dispatch, convertPrice } = useContext(Store);
-    const { Cart, Currency } = state;
+    const { Cart } = state;
     const navigate = useNavigate()
     const { isLoggedIn } = useAuth();
 

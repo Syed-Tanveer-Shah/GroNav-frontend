@@ -21,6 +21,7 @@ import SellerStepBar from './SellerStepBar';
  */
 function BecomeSeller() {
     const [view, setView] = useState('landing');
+    // eslint-disable-next-line no-unused-vars
     const [storeType, setStoreType] = useState(null);
     const [showLogin, setShowLogin] = useState(false);
     const [loginForm, setLoginForm] = useState({ email: '', password: '' });
@@ -31,6 +32,7 @@ function BecomeSeller() {
     const formRef = useRef(null);
 
     // Step index for SellerStepBar
+    // eslint-disable-next-line no-unused-vars
     const stepIndex = view === 'landing' ? 0 : view === 'storeType' ? 1 : 2;
 
     const handleStartSelling = () => {

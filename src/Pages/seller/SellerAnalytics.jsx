@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 import api from '../../Utils/Axios';
+// eslint-disable-next-line no-unused-vars
 import JourneyFunnel from '../../components/seller/JourneyFunnel';
 import { useTheme } from '../../context/ThemeContext';
 import { Select, Table, Spin } from 'antd';
@@ -18,6 +19,7 @@ const TABS = [
   { id: 'ratings',     label: '⭐ Ratings' },
 ];
 
+// eslint-disable-next-line no-unused-vars
 const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
 // All data fetched from API endpoints
@@ -32,6 +34,7 @@ export default function SellerAnalytics() {
 
   const [tab, setTab] = useState('visitors');
   const [visitorsData, setVisitorsData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [peakHours, setPeakHours] = useState([]);
   const [heatmapData, setHeatmapData] = useState([]);
   const [journeyData, setJourneyData] = useState([]);
@@ -39,6 +42,7 @@ export default function SellerAnalytics() {
   const [competitorData, setCompetitorData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [ratingsData, setRatingsData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [topProducts, setTopProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 

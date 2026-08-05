@@ -44,6 +44,7 @@ const SellerVerification = lazy(() => import("./Pages/seller/SellerVerification"
 const SellerSettings = lazy(() => import("./Pages/seller/SellerSettings"));
 const SellerCategories = lazy(() => import("./Pages/seller/SellerCategories"));
 
+// eslint-disable-next-line no-unused-vars
 const LoadingFallback = () => (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', gap: '20px' }}>
         <div className="spinner" style={{ width: '50px', height: '50px', border: '5px solid #f3f3f3', borderTop: '5px solid #6aaa00', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
