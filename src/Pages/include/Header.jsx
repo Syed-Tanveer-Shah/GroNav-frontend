@@ -140,6 +140,14 @@ function Header() {
         const query = params.toString() ? `?${params.toString()}` : "";
         navigate(`/product-list${query}`);
     };
+
+    const closeMobileMenu = () => {
+        const sidebar = document.getElementById('side-bar');
+        if (sidebar) sidebar.classList.remove('show');
+        const bg = document.getElementById('anywhere-home');
+        if (bg) bg.classList.remove('bgshow');
+    };
+
     return (
         <>
             <div className="rts-header-one-area-one">
@@ -362,22 +370,22 @@ function Header() {
                                 </div>
                             </div>
                             <div className="col-lg-12">
-                                <div className="logo-search-category-wrapper after-md-device-header">
-                                    <Link to="/" className="logo-area">
+                                <div className="logo-search-category-wrapper after-md-device-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: '10px 15px' }}>
+                                    <Link to="/" className="logo-area" onClick={closeMobileMenu}>
                                         <img
                                             src="assets/images/logo/logo-01.png"
-
-
                                             alt="Grao.Nav"
                                             className="logo"
-                                            width="150px"
+                                            width="130px"
                                         />
                                     </Link>
 
-                                    <div className="main-wrapper-action-2 d-flex">
-
-                                        <div className="actions-area">
-                                            <div className="search-btn" id="search">
+                                    <div className="main-wrapper-action-2 d-flex align-items-center" style={{ gap: '14px' }}>
+                                        <Link to="/shopping-list" className="mobile-cart-btn" onClick={closeMobileMenu} style={{ fontSize: '18px', color: '#1F1F25', display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '44px', minHeight: '44px' }} title="Shopping List">
+                                            <i className="fa-sharp fa-regular fa-cart-shopping" />
+                                        </Link>
+                                        <div className="actions-area d-flex align-items-center" style={{ gap: '12px' }}>
+                                            <div className="search-btn" id="search" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '44px', minHeight: '44px', cursor: 'pointer' }}>
                                                 <svg
                                                     width={17}
                                                     height={16}
@@ -391,7 +399,7 @@ function Header() {
                                                     />
                                                 </svg>
                                             </div>
-                                            <div className="menu-btn">
+                                            <div className="menu-btn" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '44px', minHeight: '44px', cursor: 'pointer' }}>
                                                 <svg
                                                     width={20}
                                                     height={16}
@@ -414,12 +422,12 @@ function Header() {
             </div>
 
             <div id="side-bar" className="side-bar header-two">
-                <button className="close-icon-menu">
+                <button className="close-icon-menu" onClick={closeMobileMenu}>
                     <i className="far fa-times" />
                 </button>
-                <form action="#" className="search-input-area-menu mt--30">
-                    <input type="text" placeholder="Search..." required="" />
-                    <button>
+                <form action="#" className="search-input-area-menu mt--30" onSubmit={handleHeaderSearch}>
+                    <input type="text" placeholder="Search..." required="" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+                    <button type="submit" onClick={closeMobileMenu}>
                         <i className="fa-light fa-magnifying-glass" />
                     </button>
                 </form>
@@ -438,7 +446,6 @@ function Header() {
                             >
                                 Menu
                             </button>
-
                         </div>
                     </nav>
                     <div className="tab-content" id="nav-tabContent">
@@ -453,44 +460,79 @@ function Header() {
                             <div className="mobile-menu-main">
                                 <nav className="nav-main mainmenu-nav mt--30">
                                     <ul className="mainmenu metismenu" id="mobile-menu-active">
-
                                         <li>
-                                            <Link to="/" className="main">
+                                            <Link to="/" className="main" onClick={closeMobileMenu}>
                                                 Home
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/product-list" className="main">
+                                            <Link to="/product-list" className="main" onClick={closeMobileMenu}>
                                                 ProductList
                                             </Link>
-                                        </li>  <li>
-                                            <Link to="/stores" className="main">
+                                        </li>
+                                        <li>
+                                            <Link to="/stores" className="main" onClick={closeMobileMenu}>
                                                 Stores
                                             </Link>
-                                        </li>  <li>
-                                            <Link to="/become-a-seller" className="main">
+                                        </li>
+                                        <li>
+                                            <Link to="/become-a-seller" className="main" onClick={closeMobileMenu}>
                                                 Become a Seller
                                             </Link>
-                                        </li>  <li>
-                                            <Link to="/about" className="main">
+                                        </li>
+                                        <li>
+                                            <Link to="/about" className="main" onClick={closeMobileMenu}>
                                                 About Us
                                             </Link>
-                                        </li>  <li>
-                                            <Link to="/contact" className="main">
+                                        </li>
+                                        <li>
+                                            <Link to="/contact" className="main" onClick={closeMobileMenu}>
                                                 Contact Us
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/track-order" className="main" onClick={closeMobileMenu}>
+                                                Track Order
                                             </Link>
                                         </li>
                                     </ul>
                                 </nav>
                             </div>
                             {/* mobile menu area end */}
-                        </div>
 
+                            {/* Top Bar Options (Currency / Track Order) in Drawer */}
+                            <div style={{ marginTop: '20px', padding: '15px', borderTop: '1px solid #eee', background: '#f9f9f9', borderRadius: '8px' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                                    <span style={{ fontSize: '13px', fontWeight: '600' }}>Currency:</span>
+                                    <div style={{ display: 'flex', gap: '6px' }}>
+                                        {['PKR', 'USD', 'EUR'].map((curr) => (
+                                            <button
+                                                key={curr}
+                                                type="button"
+                                                onClick={() => { dispatch({ type: "ChangeCurrency", payload: curr }); closeMobileMenu(); }}
+                                                style={{
+                                                    padding: '4px 10px',
+                                                    borderRadius: '4px',
+                                                    border: Currency === curr ? '1px solid #6aaa00' : '1px solid #ccc',
+                                                    background: Currency === curr ? '#6aaa00' : '#fff',
+                                                    color: Currency === curr ? '#fff' : '#333',
+                                                    fontSize: '12px',
+                                                    fontWeight: '600',
+                                                    cursor: 'pointer',
+                                                    minHeight: '36px'
+                                                }}
+                                            >
+                                                {curr}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {/* button area wrapper start */}
                 <div className="button-area-main-wrapper-menuy-sidebar mt--50">
-
                     <div className="buton-area-bottom">
                         {token ? <>
                             <div className="dropdown">
@@ -504,21 +546,21 @@ function Header() {
                                     Welcome, {displayName}
                                 </button>
                                 <ul className="dropdown-menu" aria-labelledby="accountDropdown">
-                                    <li><Link className="dropdown-item" to="/settings">History</Link></li>
+                                    <li><Link className="dropdown-item" to="/history" onClick={closeMobileMenu}>History</Link></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><Link className="dropdown-item text-danger" onClick={handleSignOut}>Sign Out</Link></li>
+                                    <li><button className="dropdown-item text-danger" onClick={() => { closeMobileMenu(); handleSignOut(); }}>Sign Out</button></li>
                                 </ul>
                             </div>
-                            <Link to="/shopping-list" className="rts-btn btn-primary">
+                            <Link to="/shopping-list" className="rts-btn btn-primary" onClick={closeMobileMenu}>
                                 Shopping List
                             </Link>
                         </>
                             :
                             <>
-                                <button onClick={() => setShowLoginModal(true)} className="rts-btn btn-primary">
+                                <button onClick={() => { closeMobileMenu(); setShowLoginModal(true); }} className="rts-btn btn-primary">
                                     Sign In
                                 </button>
-                                <Link to="/registration" className="rts-btn btn-primary">
+                                <Link to="/registration" className="rts-btn btn-primary" onClick={closeMobileMenu}>
                                     Sign Up
                                 </Link>
                             </>

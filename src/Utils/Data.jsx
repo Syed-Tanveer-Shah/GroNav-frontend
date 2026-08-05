@@ -1,7 +1,7 @@
 const ContactInfo = {
-    contact_phone: "+447460459667",
-    contact_email: "zeindgo369@gmail.com",
-    address: "123 Baker Street, London, NW1 6XE, UNITED KINGDOM",
+    contact_phone: "+92-318-1901162",
+    contact_email: "warisshah1162@gmail.com",
+    address: "Islamabad, Pakistan",
     facebook: "https://facebook.com",
     twitter: "https://facebook.com",
     linkedin: "https://facebook.com",
