@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../Utils/Axios';
 import { toast } from 'react-toastify';
 
@@ -29,6 +30,7 @@ function formatCNIC(value) {
 }
 
 function PhysicalSellerForm({ onBack, onSuccess }) {
+    const navigate = useNavigate();
     const [form, setForm]       = useState(initialForm);
     const [errors, setErrors]   = useState({});
     const [loading, setLoading] = useState(false);
@@ -77,15 +79,33 @@ function PhysicalSellerForm({ onBack, onSuccess }) {
             localStorage.setItem('seller_name', store_name);
             localStorage.setItem('is_seller', 'true');
             toast.success('🎉 Physical store registered! Welcome to CartGo.');
-            onSuccess(user);
+            if (onSuccess) onSuccess(user);
+            navigate('/seller');
         } catch (err) {
+            console.log('Register error:', err.response?.data);
             const data = err.response?.data;
             if (data && typeof data === 'object') {
                 const fieldErrors = {};
+                let generalMsg = '';
                 Object.entries(data).forEach(([k, v]) => {
-                    fieldErrors[k] = Array.isArray(v) ? v[0] : v;
+                    const val = Array.isArray(v) ? v.join(', ') : String(v);
+                    if (['detail', 'error', 'message', 'non_field_errors'].includes(k)) {
+                        generalMsg = val;
+                    } else {
+                        fieldErrors[k] = Array.isArray(v) ? v[0] : v;
+                    }
                 });
                 setErrors(fieldErrors);
+                if (generalMsg) {
+                    toast.error(generalMsg);
+                } else if (Object.keys(fieldErrors).length > 0) {
+                    const firstErr = Object.values(fieldErrors)[0];
+                    toast.error(`Registration failed: ${firstErr}`);
+                } else {
+                    toast.error('Registration failed. Please try again.');
+                }
+            } else if (typeof data === 'string') {
+                toast.error(data);
             } else {
                 toast.error('Registration failed. Please try again.');
             }
