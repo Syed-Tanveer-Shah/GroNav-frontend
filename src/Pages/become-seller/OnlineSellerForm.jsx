@@ -56,7 +56,12 @@ function OnlineSellerForm({ onBack, onSuccess }) {
         setErrors({});
         setLoading(true);
         try {
-            const res = await api.post('/api/seller/register/online/', form);
+            const res = await api.post('/api/seller/register/online/', form, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': 'nocsrf'
+                }
+            });
             const { token, store_name, user } = res.data;
             localStorage.clear();
             localStorage.setItem('seller_token', token);

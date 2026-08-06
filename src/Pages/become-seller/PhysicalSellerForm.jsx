@@ -72,6 +72,11 @@ function PhysicalSellerForm({ onBack, onSuccess }) {
             const res = await api.post('/api/seller/register/physical/', {
                 ...form,
                 email: form.email || `${form.owner_name.replace(/\s/g, '').toLowerCase()}@cartgo.pk`,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': 'nocsrf'
+                }
             });
             const { token, store_name, user } = res.data;
             localStorage.clear();
