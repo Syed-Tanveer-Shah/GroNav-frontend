@@ -19,24 +19,33 @@ function Stores() {
 
     // Fetch stores from API
     useEffect(() => {
+        console.log("Fetching stores from API using REACT_APP_API_URL:", process.env.REACT_APP_API_URL || 'http://localhost:8000');
         api.get("/api/stores/")
-
             .then(response => {
-                setStores(response.data);
+                console.log("Stores API response status:", response.status, "data:", response.data);
+                const storeList = Array.isArray(response.data)
+                    ? response.data
+                    : (response.data?.results || []);
+                console.log("Parsed store list count:", storeList.length, storeList);
+                setStores(storeList);
+                setError(null);
                 setLoading(false);
             })
             .catch(error => {
-                setError("Failed to load stores. Please try again.");
+                console.error("Error fetching stores:", error, error?.response?.data || error?.message);
+                setError(`Failed to load stores: ${error?.response?.data?.detail || error?.message || 'Server error'}`);
                 setLoading(false);
             });
     }, []);
 
-
-    // Filter stores based on search input
-    const filteredStores = stores.filter(store =>
-        store.name.toLowerCase().includes(search.toLowerCase()) ||
-        store.phone.includes(search)
-    );
+    // Filter stores based on search input with safety checks
+    const storeArray = Array.isArray(stores) ? stores : [];
+    const filteredStores = storeArray.filter(store => {
+        if (!store) return false;
+        const nameMatch = store.name ? store.name.toLowerCase().includes(search.toLowerCase()) : false;
+        const phoneMatch = store.phone ? String(store.phone).includes(search) : false;
+        return nameMatch || phoneMatch;
+    });
 
     return (
         <>
@@ -67,15 +76,15 @@ function Stores() {
                             <div className="tab-content">
                                 <div className="with-list mt--20 tab-pane fade show active">
                                     <div className="row g-4">
-                                        {loading && <p>Loading stores...</p>}
-                                        {error && <p className="text-danger">{error}</p>}
+                                        {loading && <p className="text-center py-4">Loading stores...</p>}
+                                        {error && <p className="text-danger text-center py-4">{error}</p>}
                                         {!loading && !error && filteredStores.length === 0 && (
-                                            <p className="text-danger mx-auto d-flex justify-content-center align-items-center">
+                                            <p className="text-danger mx-auto d-flex justify-content-center align-items-center py-4">
                                                 No stores found.
                                             </p>
                                         )}
                                         {!loading && !error && filteredStores.map(store => (
-                                            <div key={store.id} className="col-lg-6" onClick={() => navigate(`/store/${store.id}`)} style={{ cursor: 'pointer' }}>
+                                            <div key={store.id} className="col-lg-6 col-12" onClick={() => navigate(`/store/${store.id}`)} style={{ cursor: 'pointer' }}>
                                                 <div className="single-vendor-area">
                                                     <div style={{width:'64px', height:'64px', borderRadius:'50%', background:'#f0f9e0', flexShrink:0, overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center'}}>
                                                         {store.logo_url

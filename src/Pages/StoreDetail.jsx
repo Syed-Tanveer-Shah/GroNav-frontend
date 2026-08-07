@@ -44,17 +44,37 @@ export default function StoreDetail() {
 
 
   const fetchStoreAndProducts = async () => {
+    setLoading(true);
+    console.log(`Fetching store details and products for storeId: ${storeId} using REACT_APP_API_URL:`, process.env.REACT_APP_API_URL || 'http://localhost:8000');
     try {
-      const [storeRes, productsRes] = await Promise.all([
-        api.get(`/api/stores/${storeId}/`),
-        api.get(`/api/products/?store=${storeId}`)
-      ])
-      setStore(storeRes.data)
-      setProducts(productsRes.data?.results || productsRes.data || [])
+      const storeRes = await api.get(`/api/stores/${storeId}/`).catch(err => {
+        console.error("Store detail API fetch failed:", err?.response?.data || err?.message);
+        return null;
+      });
+
+      const productsRes = await api.get(`/api/products/?store=${storeId}`).catch(err => {
+        console.error("Store products API fetch failed:", err?.response?.data || err?.message);
+        return null;
+      });
+
+      if (storeRes && storeRes.data) {
+        console.log("Fetched Store details successfully:", storeRes.data);
+        setStore(storeRes.data);
+      } else {
+        console.warn("Store detail response missing for ID:", storeId);
+      }
+
+      if (productsRes && productsRes.data) {
+        const productList = productsRes.data?.results || (Array.isArray(productsRes.data) ? productsRes.data : []);
+        console.log(`Fetched ${productList.length} products for storeId ${storeId}:`, productList);
+        setProducts(productList);
+      } else {
+        setProducts([]);
+      }
     } catch (err) {
-      console.log(err)
+      console.error("Critical error in fetchStoreAndProducts:", err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -84,7 +104,7 @@ export default function StoreDetail() {
   return (
     <div style={{maxWidth:'1200px',margin:'0 auto',padding:'24px'}}>
       {/* Store Header */}
-      <div style={{background:'#fff',borderRadius:'14px',padding:'24px',marginBottom:'24px',border:'1px solid #eee',display:'flex',alignItems:'center',gap:'20px'}}>
+      <div className="store-detail-header" style={{background:'#fff',borderRadius:'14px',padding:'24px',marginBottom:'24px',border:'1px solid #eee',display:'flex',alignItems:'center',gap:'20px',flexWrap:'wrap'}}>
         <div style={{width:'80px', height:'80px', borderRadius:'50%', background:'#f0f9e0', border:'3px solid #6aaa00', flexShrink:0, overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center'}}>
           {store.logo_url
             ? <img src={store.logo_url} alt={store.name}

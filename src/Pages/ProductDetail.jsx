@@ -127,7 +127,7 @@ export default function ProductDetail() {
       </div>
 
       {/* Main Product Section */}
-      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'32px', background:'#fff', borderRadius:'14px', padding:'28px', marginBottom:'24px', border:'1px solid #eee'}}>
+      <div className="product-detail-main-grid" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'32px', background:'#fff', borderRadius:'14px', padding:'28px', marginBottom:'24px', border:'1px solid #eee'}}>
 
         {/* Left — Images */}
         <div>
@@ -209,7 +209,7 @@ export default function ProductDetail() {
           </div>
 
           {/* Action Buttons */}
-          <div style={{display:'flex', gap:'12px', marginBottom:'16px'}}>
+          <div className="product-detail-action-btns" style={{display:'flex', gap:'12px', marginBottom:'16px'}}>
             <button onClick={handleAddToCart} disabled={product.stock === 0}
               style={{flex:1, padding:'13px', background:'#6aaa00', color:'#fff', border:'none', borderRadius:'8px', fontWeight:'700', fontSize:'14px', cursor:'pointer'}}>
               Add to Cart

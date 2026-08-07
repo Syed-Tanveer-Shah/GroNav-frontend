@@ -28,22 +28,27 @@ function ProductList() {
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
+            setError(null);
+            console.log("Fetching products with query:", location.search, "using API URL:", process.env.REACT_APP_API_URL || 'http://localhost:8000');
             try {
-                // Use the current URL search params directly for the API call
                 const response = await api.get(`/api/products/${location.search}`);
+                console.log("Products API status:", response.status, "data:", response.data);
                 const data = response.data;
                 if (data && typeof data === "object" && Array.isArray(data.results)) {
+                    console.log(`Loaded ${data.results.length} products (paginated). Next page:`, data.next);
                     setProducts(data.results);
                     setFilteredProducts(data.results);
                     setNextPage(data.next);
                 } else {
-                    setProducts(data || []);
-                    setFilteredProducts(data || []);
+                    const list = Array.isArray(data) ? data : [];
+                    console.log(`Loaded ${list.length} products (unpaginated).`);
+                    setProducts(list);
+                    setFilteredProducts(list);
                     setNextPage(null);
                 }
             } catch (error) {
-                console.error("Error fetching products:", error);
-                setError("Failed to load products. Please try again.");
+                console.error("Error fetching products:", error, error?.response?.data || error?.message);
+                setError(`Failed to load products: ${error?.response?.data?.detail || error?.message || 'Server error'}`);
             } finally {
                 setLoading(false);
             }
@@ -56,8 +61,13 @@ function ProductList() {
         if (!nextPage || loadingMore) return;
         setLoadingMore(true);
         try {
-            // Fetch the nextPage directly using the full url retrieved from api
-            const response = await api.get(nextPage);
+            // Extract relative path if nextPage is a full URL from DRF
+            let targetUrl = nextPage;
+            if (targetUrl.includes('/api/')) {
+                targetUrl = '/api/' + targetUrl.split('/api/')[1];
+            }
+            console.log("Fetching next page of products using target URL:", targetUrl);
+            const response = await api.get(targetUrl);
             const data = response.data;
             if (data && typeof data === "object" && Array.isArray(data.results)) {
                 setProducts(prev => [...prev, ...data.results]);
@@ -65,7 +75,7 @@ function ProductList() {
                 setNextPage(data.next);
             }
         } catch (error) {
-            console.error("Error loading more products:", error);
+            console.error("Error loading more products:", error, error?.response?.data || error?.message);
         } finally {
             setLoadingMore(false);
         }
@@ -76,9 +86,9 @@ function ProductList() {
         const fetchCategories = async () => {
             try {
                 const response = await api.get("/api/categories/");
-
-
-                setCategories(response.data);
+                console.log("Categories API response:", response.data);
+                const catList = Array.isArray(response.data) ? response.data : (response.data?.results || []);
+                setCategories(catList);
             } catch (error) {
                 console.error("Error fetching categories:", error);
             }
@@ -87,9 +97,9 @@ function ProductList() {
         const fetchStores = async () => {
             try {
                 const response = await api.get("/api/stores/");
-
-
-                setStores(response.data);
+                console.log("Stores list for ProductList response:", response.data);
+                const storeList = Array.isArray(response.data) ? response.data : (response.data?.results || []);
+                setStores(storeList);
             } catch (error) {
                 console.error("Error fetching stores:", error);
             }
@@ -252,7 +262,7 @@ function ProductList() {
             {/* Product List */}
             <div className="container">
                 <div className="row g-0">
-                    <div className="col-xl-12 col-lg-12 p-5">
+                    <div className="col-xl-12 col-lg-12 py-3 px-2 px-md-4">
                         <div className="tab-content" id="myTabContent">
                             <div className="product-area-wrapper-shopgrid-list mt--20 tab-pane fade show active">
                                 <div className="row g-4">

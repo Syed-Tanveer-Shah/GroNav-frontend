@@ -24,8 +24,6 @@ const THEMES = {
 const AvatarCircle = ({ storeLogo, storeName, size = 38, fontSize = 16 }) => (
   storeLogo
     ? <img src={storeLogo} alt="store logo" style={{ width: size, height: size, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
-
-
     : <div style={{ width: size, height: size, borderRadius: '50%', backgroundColor: '#6aaa00', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold', fontSize, flexShrink: 0 }}>
         {storeName[0]?.toUpperCase()}
       </div>
@@ -36,6 +34,7 @@ export default function SellerLayout() {
   const location   = useLocation();
   const { theme, setTheme } = useTheme();
   const [collapsed, setCollapsed]   = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [storeName, setStoreName]   = useState('My Store');
   const [storeLogo, setStoreLogo]   = useState(null);
   const [notificationsList, setNotificationsList] = useState([]);
@@ -113,16 +112,27 @@ export default function SellerLayout() {
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', backgroundColor: c.bg, color: c.text, fontFamily: "'Inter', 'Segoe UI', sans-serif", overflow: 'hidden' }}>
+    <div style={{ display: 'flex', height: '100vh', backgroundColor: c.bg, color: c.text, fontFamily: "'Inter', 'Segoe UI', sans-serif", overflow: 'hidden', position: 'relative' }}>
+
+      {/* Backdrop for mobile */}
+      {mobileOpen && (
+        <div
+          onClick={() => setMobileOpen(false)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 99 }}
+        />
+      )}
 
       {/* ── SIDEBAR ── */}
-      <aside style={{
-        width: collapsed ? '70px' : '220px', minWidth: collapsed ? '70px' : '220px',
-        backgroundColor: c.sidebar, borderRight: `1px solid ${c.border}`,
-        display: 'flex', flexDirection: 'column',
-        boxShadow: '3px 0 15px rgba(0,0,0,0.06)', transition: 'width 0.3s ease, min-width 0.3s ease',
-        zIndex: 100,
-      }}>
+      <aside
+        className={`seller-sidebar ${mobileOpen ? 'mobile-open' : ''}`}
+        style={{
+          width: collapsed ? '70px' : '220px', minWidth: collapsed ? '70px' : '220px',
+          backgroundColor: c.sidebar, borderRight: `1px solid ${c.border}`,
+          display: 'flex', flexDirection: 'column',
+          boxShadow: '3px 0 15px rgba(0,0,0,0.06)', transition: 'transform 0.3s ease, width 0.3s ease, min-width 0.3s ease',
+          zIndex: 100,
+        }}
+      >
         {/* Logo */}
         <div style={{ padding: '18px 16px', display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'space-between', borderBottom: `1px solid ${c.border}` }}>
           {!collapsed && <span style={{ fontWeight: '800', fontSize: '18px', color: '#6aaa00', letterSpacing: '-0.5px' }}>🛒 Gro.Nav</span>}
@@ -147,6 +157,7 @@ export default function SellerLayout() {
           {NAV.map(item => (
             <NavLink key={item.name} to={item.path} end={item.end}
               title={collapsed ? item.name : ''}
+              onClick={() => setMobileOpen(false)}
               style={({ isActive }) => ({
                 display: 'flex', alignItems: 'center', gap: collapsed ? 0 : '12px',
                 padding: '10px 12px', borderRadius: '10px', marginBottom: '4px',
@@ -166,7 +177,7 @@ export default function SellerLayout() {
 
         {/* Logout */}
         <div style={{ padding: '12px 8px', borderTop: `1px solid ${c.border}` }}>
-          <button onClick={handleLogout} title={collapsed ? 'Logout' : ''} style={{
+          <button onClick={() => { setMobileOpen(false); handleLogout(); }} title={collapsed ? 'Logout' : ''} style={{
             width: '100%', padding: '10px 12px', backgroundColor: 'rgba(239,83,80,0.08)',
             color: '#ef5350', border: '1px solid rgba(239,83,80,0.3)', borderRadius: '10px',
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'flex-start',
@@ -185,7 +196,16 @@ export default function SellerLayout() {
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '0 24px', flexShrink: 0, boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
         }}>
-          <h3 style={{ margin: 0, fontWeight: '700', fontSize: '18px', color: c.text }}>{pageTitle}</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <button
+              className="seller-mobile-toggle"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              style={{ background: 'none', border: 'none', fontSize: '22px', cursor: 'pointer', color: c.text, display: 'none', padding: 0 }}
+            >
+              ☰
+            </button>
+            <h3 style={{ margin: 0, fontWeight: '700', fontSize: '18px', color: c.text }}>{pageTitle}</h3>
+          </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             {/* Theme dots */}
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
