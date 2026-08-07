@@ -218,7 +218,7 @@ const HeroSearch = () => {
                    <div className="price-inputs-inline">
                       <input 
                           type="number" 
-                          placeholder="Min (Rs.)" 
+                          placeholder="Min" 
                           value={minPrice}
                           onChange={(e) => handleMinPriceChange(e.target.value)}
                           onBlur={() => validatePrices(minPrice, maxPrice)}
@@ -227,7 +227,7 @@ const HeroSearch = () => {
                       <span className="price-sep">-</span>
                       <input 
                           type="number" 
-                          placeholder="Max (Rs.)" 
+                          placeholder="Max" 
                           value={maxPrice}
                           onChange={(e) => handleMaxPriceChange(e.target.value)}
                           onBlur={() => validatePrices(minPrice, maxPrice)}

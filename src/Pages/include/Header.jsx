@@ -483,17 +483,12 @@ function Header() {
                                         </li>
                                         <li>
                                             <Link to="/about" className="main" onClick={closeMobileMenu}>
-                                                About Us
+                                                About
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/contact" className="main" onClick={closeMobileMenu}>
-                                                Contact Us
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/track-order" className="main" onClick={closeMobileMenu}>
-                                                Track Order
+                                                Contact
                                             </Link>
                                         </li>
                                     </ul>
@@ -596,6 +591,7 @@ function Header() {
                                     value={email}
                                     onChange={e => setEmail(e.target.value)}
                                     required
+                                    style={{width:'100%', boxSizing:'border-box'}}
                                 />
                             </div>
                             <div className="input-wrapper" style={{ position: "relative" }}>
@@ -607,6 +603,7 @@ function Header() {
                                     value={password}
                                     onChange={e => setPassword(e.target.value)}
                                     required
+                                    style={{width:'100%', boxSizing:'border-box'}}
                                 />
                                 <i
                                     className={`fa-regular ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
