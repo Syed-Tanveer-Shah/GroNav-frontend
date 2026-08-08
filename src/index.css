@@ -509,19 +509,101 @@ body {
   width: 100% !important;
 }
 
-/* Override style.css display:none — top bar must be identical on ALL screen sizes */
+/* Override style.css display:none — top bar visible on ALL screen sizes */
 .header-top-area {
   display: block !important;
-  overflow-x: auto !important;
 }
 
-.header-top-area .header-mid-wrapper-between {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  flex-wrap: nowrap !important;
-  min-width: max-content !important;
+/* ===== MOBILE PORTRAIT: top green bar wraps into 2 centered rows ===== */
+@media (max-width: 768px) and (orientation: portrait) {
+  .header-top-area {
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .header-top-area .container {
+    max-width: 100% !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Wrapper: stack the two .nav-sm-left groups into 2 rows */
+  .header-top-area .header-mid-wrapper-between {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    gap: 2px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Each .nav-sm-left row: horizontal, centered, no overflow */
+  .header-top-area .nav-sm-left {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* The ul lists inside each row */
+  .header-top-area .header-mid-wrapper-between .nav-sm-left ul {
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .header-top-area .header-mid-wrapper-between .nav-sm-left .nav-h_top {
+    position: static !important;
+  }
+
+  /* Hide the ::after separator bars that cause overflow */
+  .header-top-area .header-mid-wrapper-between .nav-sm-left .nav-h_top::after {
+    display: none !important;
+  }
+  .header-top-area .header-mid-wrapper-between .nav-sm-left .nav-h_top.language li a::after {
+    display: none !important;
+  }
+
+  /* Language row gap */
+  .header-top-area .header-mid-wrapper-between .nav-sm-left .nav-h_top.language {
+    gap: 10px !important;
+  }
+
+  /* Text styling — readable size, white, no wrapping per item */
+  .header-top-area .nav-h_top li,
+  .header-top-area .nav-h_top li a,
+  .header-top-area .nav-sm-left .para,
+  .header-top-area .header-mid-wrapper-between .nav-sm-left ul li a {
+    font-size: 11px !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+  }
+
+  /* The opening-hours paragraph */
+  .header-top-area .nav-sm-left .para {
+    display: inline !important;
+    max-width: none !important;
+    font-size: 11px !important;
+  }
+
+  /* Remove padding from links that style.css sets */
+  .header-top-area .header-mid-wrapper-between .nav-sm-left ul li a {
+    padding: 0 !important;
+  }
 }
 
 
