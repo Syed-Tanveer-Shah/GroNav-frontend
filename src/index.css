@@ -443,66 +443,12 @@ code {
     max-width: 100vw !important;
   }
 
-  /* FIX 1: Top Bar & Navbar on Mobile */
+  /* Top bar — identical on all screen sizes, horizontal scroll if needed */
   .header-top-area {
-    display: block !important;
-    padding: 4px 0 !important;
-    background: #1F1F25 !important;
+    overflow-x: auto;
   }
-  /* FIX 2: Top bar — ensure all items fit on ONE line on mobile */
   .header-top-area .header-mid-wrapper-between {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 4px !important;
-    padding: 0 4px !important;
-    width: 100% !important;
-    overflow: hidden !important;
-  }
-  .header-top-area .nav-sm-left {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
-    gap: 4px !important;
-    flex-shrink: 1 !important;
-    min-width: 0 !important;
-  }
-  .header-top-area .nav-sm-left .para {
-    display: none !important;
-  }
-  .header-top-area .nav-h_top {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
-    gap: 4px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
-    font-size: 11px !important;
-  }
-  .header-top-area .nav-h_top li,
-  .header-top-area .nav-h_top li a,
-  .header-top-area .nav-h_top li span {
-    font-size: 11px !important;
-    white-space: nowrap !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    line-height: 1.2 !important;
-  }
-  /* Hide all separators/pseudo-elements in top bar on mobile */
-  .header-top-area .nav-h_top::after,
-  .header-top-area .nav-h_top.language::after,
-  .header-top-area .nav-h_top li::after,
-  .header-top-area .nav-h_top li a::after {
-    display: none !important;
-    content: none !important;
-    width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    min-width: max-content;
   }
   .after-md-device-header {
     display: flex !important;
@@ -563,28 +509,50 @@ code {
     font-size: 11px !important;
   }
 
-  /* FIX 3: Banner Slider on Mobile */
+  /* FIX 2: Banner Slider on Mobile — full width, one slide, readable text */
+  .rts-banner-area-one {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+  .category-area-main-wrapper-one {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+  .mySwiper-category-1,
+  .mySwiper-category-1 .swiper-wrapper,
   .mySwiper-category-1 .swiper-slide {
     width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+  .banner-bg-image {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 50px 20px !important;
+    background-size: cover !important;
+    background-position: center center !important;
   }
   .banner-one-inner-content {
-    padding: 0 15px !important;
+    padding: 0 10px !important;
     box-sizing: border-box !important;
   }
   .banner-one-inner-content .title {
-    font-size: 22px !important;
+    font-size: 24px !important;
     line-height: 1.3 !important;
     margin-bottom: 18px !important;
     word-break: break-word !important;
+    color: #fff !important;
   }
   .banner-one-inner-content .pre {
     font-size: 13px !important;
     display: block !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 10px !important;
     word-break: break-word !important;
+    color: #FFE884 !important;
   }
-  .banner-bg-image.ptb--120 {
-    padding: 40px 15px !important;
+  .banner-one-inner-content .rts-btn {
+    display: inline-flex !important;
+    min-height: 44px !important;
   }
 
   /* FIX 5: General Mobile UI & Touch Targets */
@@ -628,37 +596,52 @@ code {
   .rts-header-nav-area-one {
     display: none !important;
   }
-  #side-bar .mobile-menu-main,
-  #side-bar .mobile-menu-main .mainmenu-nav,
-  #side-bar .mobile-menu-main .mainmenu {
-    display: block !important;
-  }
-  #side-bar .mobile-menu-main .mainmenu li {
-    display: block !important;
-    margin-bottom: 8px !important;
-  }
-  #side-bar .mobile-menu-main .mainmenu li a {
-    font-size: 16px !important;
-    font-weight: 500 !important;
-    color: #1F1F25 !important;
-    display: block !important;
-    padding: 8px 0 !important;
+
+  /* FIX 1: Hamburger sidebar — make scrollable on mobile */
+  #side-bar {
+    overflow-y: auto !important;
+    padding: 30px 20px !important;
   }
 }
 
-/* FIX 1: Always show mobile menu nav links inside #side-bar (overrides style.css display:none) */
+/* FIX 1: Always show ALL nav links and auth buttons inside #side-bar (overrides style.css display:none) */
 #side-bar .mobile-menu-main {
   display: block !important;
 }
 #side-bar .mobile-menu-main .mainmenu-nav,
-#side-bar .mobile-menu-main .mainmenu {
+#side-bar .mobile-menu-main .mainmenu,
+#side-bar .mobile-menu-nav-area {
   display: block !important;
 }
-#side-bar .mobile-menu-main .mainmenu li {
+#side-bar .mobile-menu-main .mainmenu li,
+#side-bar .mobile-menu-main .mainmenu-nav ul li {
   display: block !important;
+  list-style: none !important;
+  margin-bottom: 4px !important;
 }
-#side-bar .mobile-menu-main .mainmenu li a {
+#side-bar .mobile-menu-main .mainmenu li a,
+#side-bar .mobile-menu-main .mainmenu li a.main {
   display: block !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: #1F1F25 !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid #f3f3f3 !important;
+  text-decoration: none !important;
+}
+/* Auth buttons and shopping list in sidebar */
+#side-bar .button-area-main-wrapper-menuy-sidebar {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#side-bar .button-area-main-wrapper-menuy-sidebar .buton-area-bottom {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+}
+#side-bar .button-area-main-wrapper-menuy-sidebar .rts-btn {
+  display: inline-flex !important;
+  min-height: 44px !important;
 }
 
 /* ── 2. HOMEPAGE — Hero Search ───────────────────────────────────────── */
