@@ -606,56 +606,36 @@ html, body {
     box-sizing: border-box !important;
     margin: 0 auto !important;
   }
-  /* Row 1: Category (100%)
-     Row 2: City (100%)
-     Row 3: Min | Max (flex: 1) + Search Button 🔍 (54px) on SAME ROW */
   .pw-main-form {
     display: flex !important;
-    flex-wrap: wrap !important;
-    flex-direction: row !important;
+    flex-direction: column !important;
     width: 100% !important;
-    align-items: stretch !important;
   }
-  .pw-main-form > .pw-form-col:nth-child(1),
-  .pw-main-form > .pw-form-col:nth-child(2) {
+  .pw-form-col {
     width: 100% !important;
-    flex: 0 0 100% !important;
+    flex: none !important;
     border-right: none !important;
     border-bottom: 1px solid #eee !important;
     min-height: 52px !important;
-  }
-  .pw-main-form > .pw-form-col:nth-child(3) {
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
-    border-right: none !important;
-    border-bottom: none !important;
-    min-height: 52px !important;
+    box-sizing: border-box !important;
   }
   .pw-main-search-btn {
-    flex: 0 0 54px !important;
-    width: 54px !important;
+    width: 100% !important;
     height: 52px !important;
-    border-radius: 0 0 8px 0 !important;
-    font-size: 18px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    border-radius: 0 0 8px 8px !important;
+    font-size: 16px !important;
   }
   .price-range-dropdown-trigger {
     width: 100% !important;
-    padding: 0 8px !important;
-    height: 52px !important;
+    padding: 8px 12px !important;
     box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 4px !important;
   }
   .price-inputs-inline {
     width: 100% !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 4px !important;
+    gap: 6px !important;
     box-sizing: border-box !important;
   }
   .price-input {
@@ -663,7 +643,7 @@ html, body {
     width: 0 !important;
     min-width: 0 !important;
     font-size: 12px !important;
-    padding: 4px 4px !important;
+    padding: 6px 8px !important;
     box-sizing: border-box !important;
   }
 }
@@ -699,7 +679,6 @@ html, body {
   .rts-banner-area-one {
     width: 100% !important;
     overflow: hidden !important;
-    margin-bottom: 20px !important;
   }
   .category-area-main-wrapper-one {
     width: 100% !important;
@@ -716,7 +695,7 @@ html, body {
   .banner-bg-image {
     width: 100% !important;
     box-sizing: border-box !important;
-    padding: 30px 16px !important;
+    padding: 40px 16px !important;
     background-size: cover !important;
     background-position: center center !important;
   }
@@ -726,23 +705,23 @@ html, body {
     text-align: center !important;
   }
   .banner-one-inner-content .title {
-    font-size: 20px !important;
+    font-size: 22px !important;
     line-height: 1.3 !important;
-    margin-bottom: 14px !important;
+    margin-bottom: 16px !important;
     word-break: break-word !important;
     color: #fff !important;
   }
   .banner-one-inner-content .pre {
     font-size: 12px !important;
     display: block !important;
-    margin-bottom: 6px !important;
+    margin-bottom: 8px !important;
     word-break: break-word !important;
     color: #FFE884 !important;
   }
   .banner-one-inner-content .rts-btn {
     display: inline-flex !important;
-    padding: 8px 16px !important;
-    min-height: 40px !important;
+    padding: 10px 20px !important;
+    min-height: 44px !important;
     font-size: 13px !important;
   }
 }

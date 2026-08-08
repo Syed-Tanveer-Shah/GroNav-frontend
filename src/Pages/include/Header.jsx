@@ -247,7 +247,7 @@ function Header() {
                                                 />
                                             </svg>
                                         </div>
-                                        <div className="menu-btn" id="menu-btn">
+                                        <div className="menu-btn" id="menu-btn" onClick={() => { const s = document.getElementById('side-bar'); if (s) s.classList.add('show'); const bg = document.getElementById('anywhere-home'); if (bg) bg.classList.add('bgshow'); }}>
                                             <svg
                                                 width={20}
                                                 height={16}
@@ -400,7 +400,7 @@ function Header() {
                                                     />
                                                 </svg>
                                             </div>
-                                            <div className="menu-btn" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '44px', minHeight: '44px', cursor: 'pointer' }}>
+                                            <div className="menu-btn" onClick={() => { const s = document.getElementById('side-bar'); if (s) s.classList.add('show'); const bg = document.getElementById('anywhere-home'); if (bg) bg.classList.add('bgshow'); }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '44px', minHeight: '44px', cursor: 'pointer' }}>
                                                 <svg
                                                     width={20}
                                                     height={16}
@@ -649,3 +649,4 @@ function Header() {
 }
 
 export default Header;
+
