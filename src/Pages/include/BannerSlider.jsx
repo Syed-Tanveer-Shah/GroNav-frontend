@@ -5,30 +5,60 @@ import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
 
+// Register modules on the Swiper class (required in Swiper v8+).
+// Without this, Autoplay silently fails and loop transitions can stall
+// on a blank cloned slide.
+Swiper.use([Navigation, Autoplay]);
+
 const BannerSlider = () => {
   useEffect(() => {
-    new Swiper(".mySwiper-category-1", {
-      spaceBetween: 1,
+    const swiper = new Swiper(".mySwiper-category-1", {
+      // spaceBetween MUST be 0 — even 1px creates a visible white gap/flash
+      // between cloned loop slides during the transition.
+      spaceBetween: 0,
       slidesPerView: 1,
       loop: true,
       speed: 2000,
       autoplay: {
         delay: 4000,
+        disableOnInteraction: false,
       },
+      // watchSlidesProgress ensures Swiper correctly tracks all slides
+      // (including loop clones) so none renders blank during transition.
+      watchSlidesProgress: true,
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
-      modules: [Navigation, Autoplay],
       breakpoints: {
-        0: { slidesPerView: 1, spaceBetween: 0 },
-        320: { slidesPerView: 1, spaceBetween: 0 },
-        480: { slidesPerView: 1, spaceBetween: 0 },
-        640: { slidesPerView: 1, spaceBetween: 0 },
-        840: { slidesPerView: 1, spaceBetween: 0 },
+        0:    { slidesPerView: 1, spaceBetween: 0 },
+        320:  { slidesPerView: 1, spaceBetween: 0 },
+        480:  { slidesPerView: 1, spaceBetween: 0 },
+        640:  { slidesPerView: 1, spaceBetween: 0 },
+        840:  { slidesPerView: 1, spaceBetween: 0 },
         1140: { slidesPerView: 1, spaceBetween: 0 },
       },
     });
+
+    // On mobile, the container may not have its final pixel width at the
+    // exact moment Swiper initialises (CSS layout / flex settling).
+    // Calling update() after one animation frame forces Swiper to
+    // recalculate all slide widths and the wrapper's translate position,
+    // eliminating the "squeezed first slide / white gap on next slide" issue.
+    const updateTimer = setTimeout(() => {
+      if (swiper && typeof swiper.update === "function") {
+        swiper.update();
+      }
+    }, 100);
+
+    return () => {
+      clearTimeout(updateTimer);
+      // Clean up Swiper instance on unmount to prevent stale instances
+      // re-using the same DOM node and causing blank-slide on remount.
+      if (swiper && typeof swiper.destroy === "function") {
+        swiper.destroy(true, true);
+      }
+    };
   }, []);
 
   return (

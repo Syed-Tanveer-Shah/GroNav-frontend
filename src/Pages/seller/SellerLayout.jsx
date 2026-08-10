@@ -117,8 +117,9 @@ export default function SellerLayout() {
       {/* Backdrop for mobile */}
       {mobileOpen && (
         <div
+          className="seller-mobile-backdrop"
           onClick={() => setMobileOpen(false)}
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 99 }}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 999 }}
         />
       )}
 
@@ -136,9 +137,14 @@ export default function SellerLayout() {
         {/* Logo */}
         <div style={{ padding: '18px 16px', display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'space-between', borderBottom: `1px solid ${c.border}` }}>
           {!collapsed && <span style={{ fontWeight: '800', fontSize: '18px', color: '#6aaa00', letterSpacing: '-0.5px' }}>🛒 Gro.Nav</span>}
-          <button onClick={() => setCollapsed(!collapsed)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6aaa00', fontSize: '18px', padding: '4px', borderRadius: '6px', lineHeight: 1 }}>
-            {collapsed ? '▶' : '◀'}
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button className="seller-mobile-close" onClick={() => setMobileOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: c.text, fontSize: '18px', padding: '4px', display: 'none' }}>
+              ✕
+            </button>
+            <button className="seller-desktop-toggle" onClick={() => setCollapsed(!collapsed)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6aaa00', fontSize: '18px', padding: '4px', borderRadius: '6px', lineHeight: 1 }}>
+              {collapsed ? '▶' : '◀'}
+            </button>
+          </div>
         </div>
 
         {/* Seller Info */}
@@ -191,12 +197,12 @@ export default function SellerLayout() {
       {/* ── MAIN ── */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         {/* Topbar */}
-        <header style={{
+        <header className="seller-header" style={{
           height: '62px', backgroundColor: c.sidebar, borderBottom: `1px solid ${c.border}`,
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '0 24px', flexShrink: 0, boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="seller-header-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <button
               className="seller-mobile-toggle"
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -204,9 +210,14 @@ export default function SellerLayout() {
             >
               ☰
             </button>
-            <h3 style={{ margin: 0, fontWeight: '700', fontSize: '18px', color: c.text }}>{pageTitle}</h3>
+            <h3 className="seller-header-title desktop-only" style={{ margin: 0, fontWeight: '700', fontSize: '18px', color: c.text }}>{pageTitle}</h3>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          
+          <div className="seller-header-center mobile-only" style={{ display: 'none', fontWeight: '700', fontSize: '16px', color: c.text, textAlign: 'center', flex: 1 }}>
+            {storeName}
+          </div>
+
+          <div className="seller-header-right" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             {/* Theme dots */}
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
               {[['light','#f4f6f8','#333'],['dark-pro','#1a2a1a','#fff'],['soft-green','#d8f0a0','#333']].map(([t,bg,border]) => (
@@ -219,15 +230,17 @@ export default function SellerLayout() {
               ))}
             </div>
             {/* Notification Bell with Dropdown */}
-            <div ref={dropdownRef} style={{ position: 'relative' }}>
+            <div ref={dropdownRef} className="seller-notification-wrapper" style={{ position: 'relative', zIndex: 1001 }}>
               <div
+                className="seller-notification-bell"
                 onClick={() => setShowDropdown(!showDropdown)}
                 style={{
                   width: '38px', height: '38px', borderRadius: '10px',
                   backgroundColor: showDropdown ? 'rgba(106,170,0,0.1)' : 'transparent',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   cursor: 'pointer', position: 'relative', border: `1px solid ${c.border}`,
-                  transition: 'all 0.2s'
+                  transition: 'all 0.2s',
+                  zIndex: 1001
                 }}
               >
                 <span style={{ fontSize: '20px' }}>🔔</span>
@@ -245,12 +258,15 @@ export default function SellerLayout() {
               </div>
 
               {showDropdown && (
-                <div style={{
-                  position: 'absolute', top: '48px', right: 0, width: '320px',
-                  background: c.sidebar, borderRadius: '14px',
-                  boxShadow: '0 10px 40px rgba(0,0,0,0.15)', border: `1px solid ${c.border}`,
-                  zIndex: 1000, overflow: 'hidden'
-                }}>
+                <div 
+                  className="seller-notification-dropdown"
+                  style={{
+                    position: 'absolute', top: '48px', right: 0, width: '320px',
+                    background: c.sidebar, borderRadius: '14px',
+                    boxShadow: '0 10px 40px rgba(0,0,0,0.15)', border: `1px solid ${c.border}`,
+                    zIndex: 1001, overflow: 'hidden'
+                  }}
+                >
                   {/* Header */}
                   <div style={{
                     padding: '14px 16px', borderBottom: `1px solid ${c.border}`,
@@ -309,7 +325,7 @@ export default function SellerLayout() {
         </header>
 
         {/* Page Content */}
-        <main style={{ flex: 1, overflowY: 'auto', padding: '28px 30px', backgroundColor: c.bg }}>
+        <main className="seller-main-content" style={{ flex: 1, overflowY: 'auto', padding: '28px 30px', backgroundColor: c.bg }}>
           <Outlet />
         </main>
       </div>

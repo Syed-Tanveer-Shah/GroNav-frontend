@@ -23,6 +23,13 @@ function ProductList() {
 
     const [nextPage, setNextPage] = useState(null);
     const [loadingMore, setLoadingMore] = useState(false);
+    const [activeDropdown, setActiveDropdown] = useState(null);
+
+    useEffect(() => {
+        const handleClickOutside = () => setActiveDropdown(null);
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, []);
 
     // Fetch products with query parameters from URL
     useEffect(() => {
@@ -122,6 +129,7 @@ function ProductList() {
     const handleCategoryClick = (e, categoryName) => {
         // BUG 1 FIX: prevent Link's default navigation to "#" from overriding navigate()
         e.preventDefault();
+        setActiveDropdown(null);
         const params = new URLSearchParams(location.search);
         if (categoryName) {
             params.set("category", categoryName);
@@ -134,6 +142,7 @@ function ProductList() {
     const handleBranchClick = (e, storeId) => {
         // BUG 1 FIX: prevent Link's default navigation to "#" from overriding navigate()
         e.preventDefault();
+        setActiveDropdown(null);
         const params = new URLSearchParams(location.search);
         if (storeId) {
             params.set("store", storeId);
@@ -209,10 +218,19 @@ function ProductList() {
 
                                     {/* Category Filter */}
                                     <div className="category-search-wrapper">
-                                        <div className="category-btn category-hover-header">
+                                        <div 
+                                            className={`category-btn category-hover-header ${activeDropdown === 'category' ? 'show' : ''}`}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setActiveDropdown(prev => prev === 'category' ? null : 'category');
+                                            }}
+                                        >
                                             <img className="parent" src="assets/images/icons/bar-1.svg" alt="icons" />
                                             <span>Categories</span>
-                                            <ul className="category-sub-menu metismenu">
+                                            <ul 
+                                                className={`category-sub-menu metismenu ${activeDropdown === 'category' ? 'show' : ''}`}
+                                                onClick={(e) => e.stopPropagation()}
+                                            >
                                                 <li>
                                                     {/* BUG 1 FIX: pass event to handler to call preventDefault() */}
                                                     <Link to="#" className="menu-item" onClick={(e) => handleCategoryClick(e, null)}>
@@ -232,10 +250,19 @@ function ProductList() {
 
                                     {/* Store Filter */}
                                     <div className="category-search-wrapper">
-                                        <div className="category-btn category-hover-header">
+                                        <div 
+                                            className={`category-btn category-hover-header ${activeDropdown === 'store' ? 'show' : ''}`}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setActiveDropdown(prev => prev === 'store' ? null : 'store');
+                                            }}
+                                        >
                                             <img className="parent" src="assets/images/icons/bar-1.svg" alt="icons" />
                                             <span>Stores</span>
-                                            <ul className="category-sub-menu metismenu">
+                                            <ul 
+                                                className={`category-sub-menu metismenu ${activeDropdown === 'store' ? 'show' : ''}`}
+                                                onClick={(e) => e.stopPropagation()}
+                                            >
                                                 <li>
                                                     <Link to="#" className="menu-item" onClick={(e) => handleBranchClick(e, null)}>
                                                         <span>All Stores</span>
