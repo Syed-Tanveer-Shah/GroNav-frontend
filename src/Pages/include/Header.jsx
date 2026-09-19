@@ -422,6 +422,9 @@ function Header() {
                 </div>
             </div>
 
+            {/* Mobile overlay backdrop — clicking it closes the sidebar */}
+            <div id="anywhere-home" onClick={closeMobileMenu}></div>
+
             <div id="side-bar" className="side-bar header-two">
                 <button className="close-icon-menu" onClick={closeMobileMenu}>
                     <i className="far fa-times" />
