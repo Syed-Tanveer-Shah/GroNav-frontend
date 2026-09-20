@@ -79,6 +79,19 @@ const CategorySlider = () => {
             color: #555 !important;
             font-size: 24px;
           }
+          @media (max-width: 768px) {
+            .single-category img {
+              width: 60px;
+              height: 60px;
+            }
+            .category-slider-container {
+              padding: 5px 0;
+            }
+            .mySwiper-category .swiper-button-next,
+            .mySwiper-category .swiper-button-prev {
+              display: none !important;
+            }
+          }
         `}
       </style>
 

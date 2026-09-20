@@ -165,11 +165,12 @@ function Header() {
 
 
                                         </ul>
+                                        <span className="text-white d-lg-none mx-1">|</span>
                                         <p className="para text-white">
                                             We are open to your everyday from 7:00 to 22:00
                                         </p>
                                     </div>
-                                    <div className="nav-sm-left">
+                                    <div className="nav-sm-left header-utility-desktop">
                                         <ul className="nav-h_top language">
                                             <li className="category-hover-header language-hover">
                                                 <Link to="#" className="text-white " style={{ marginLeft: "end" }}> English</Link>
@@ -499,26 +500,29 @@ function Header() {
                             </div>
                             {/* mobile menu area end */}
 
-                            {/* Top Bar Options (Currency / Track Order) in Drawer */}
-                            <div style={{ marginTop: '20px', padding: '15px', borderTop: '1px solid #eee', background: '#f9f9f9', borderRadius: '8px' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-                                    <span style={{ fontSize: '13px', fontWeight: '600' }}>Currency:</span>
+                            {/* Utility section in drawer: Currency + Track Order only */}
+                            <div style={{ marginTop: '20px', padding: '15px', borderTop: '2px solid #e0e0e0', background: '#f5f5f5', borderRadius: '8px' }}>
+
+                                {/* Currency */}
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                                    <span style={{ fontSize: '13px', fontWeight: '700', color: '#333' }}>Currency</span>
                                     <div style={{ display: 'flex', gap: '6px' }}>
                                         {['PKR', 'USD', 'EUR'].map((curr) => (
                                             <button
                                                 key={curr}
                                                 type="button"
-                                                onClick={() => { dispatch({ type: "ChangeCurrency", payload: curr }); closeMobileMenu(); }}
+                                                onClick={() => { dispatch({ type: "ChangeCurrency", payload: curr }); }}
                                                 style={{
-                                                    padding: '4px 10px',
+                                                    padding: '6px 12px',
                                                     borderRadius: '4px',
-                                                    border: Currency === curr ? '1px solid #6aaa00' : '1px solid #ccc',
+                                                    border: Currency === curr ? '2px solid #6aaa00' : '1px solid #ccc',
                                                     background: Currency === curr ? '#6aaa00' : '#fff',
-                                                    color: Currency === curr ? '#fff' : '#333',
+                                                    color: Currency === curr ? '#fff' : '#444',
                                                     fontSize: '12px',
-                                                    fontWeight: '600',
+                                                    fontWeight: '700',
                                                     cursor: 'pointer',
-                                                    minHeight: '36px'
+                                                    minHeight: '36px',
+                                                    minWidth: '48px'
                                                 }}
                                             >
                                                 {curr}
@@ -526,6 +530,48 @@ function Header() {
                                         ))}
                                     </div>
                                 </div>
+
+                                {/* Divider */}
+                                <hr style={{ border: 'none', borderTop: '1px solid #ddd', margin: '12px 0' }} />
+
+                                {/* Language */}
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                                    <span style={{ fontSize: '13px', fontWeight: '700', color: '#333' }}>Language</span>
+                                    <ul className="nav-h_top language" style={{ margin: 0, padding: 0 }}>
+                                        <li className="category-hover-header language-hover" style={{ listStyle: 'none' }}>
+                                            <Link to="#" style={{ color: '#333', fontSize: '13px', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                English <i className="fa-regular fa-chevron-down" style={{ fontSize: '10px' }} />
+                                            </Link>
+                                            <ul className="category-sub-menu" style={{ right: 0, left: 'auto' }}>
+                                                <li><Link to="#" className="menu-item"><span>Italian</span></Link></li>
+                                                <li><Link to="#" className="menu-item"><span>Russian</span></Link></li>
+                                                <li><Link to="#" className="menu-item"><span>Chinian</span></Link></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                {/* Divider */}
+                                <hr style={{ border: 'none', borderTop: '1px solid #ddd', margin: '12px 0' }} />
+
+                                {/* Track Order */}
+                                <Link
+                                    to="/track-order"
+                                    onClick={closeMobileMenu}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        fontSize: '13px',
+                                        fontWeight: '600',
+                                        color: '#6aaa00',
+                                        textDecoration: 'none',
+                                        padding: '6px 0'
+                                    }}
+                                >
+                                    <i className="fa-light fa-location-dot" style={{ fontSize: '14px' }} />
+                                    Track Order
+                                </Link>
                             </div>
                         </div>
                     </div>
