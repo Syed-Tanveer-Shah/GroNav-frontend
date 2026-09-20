@@ -933,6 +933,39 @@ body {
   }
 }
 
+/* 4b. HERO / BANNER SLIDER ON DESKTOP — Full available width, removing container constraints */
+@media (min-width: 992px) {
+  .rts-banner-area-one .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .rts-banner-area-one .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .rts-banner-area-one .col-lg-12 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .rts-banner-area-one .category-area-main-wrapper-one {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  .rts-banner-area-one .banner-bg-image {
+    border-radius: 0 !important;
+    width: 100% !important;
+  }
+}
+
 /* 5. HERO / BANNER SLIDER ON MOBILE — Responsive, full width edge-to-edge, single complete slide at a time */
 @media (max-width: 991px) {
 
@@ -988,10 +1021,11 @@ body {
     padding: 0 !important;
   }
 
-  /* Swiper root container: exactly 100% of parent width, overflow hidden */
+  /* Swiper root container: aspect-ratio anchors the height here so slides fill it consistently */
   .mySwiper-category-1 {
     width: 100% !important;
     max-width: 100% !important;
+    aspect-ratio: 1680 / 480 !important;
     overflow: hidden !important;
     position: relative !important;
     margin: 0 auto !important;
@@ -1011,11 +1045,12 @@ body {
     padding: 0 !important;
   }
 
-  /* Each mobile slide: EXACTLY 100% width, flex-shrink 0, occupies full banner width */
+  /* Each mobile slide: EXACTLY 100% width and height, filling the swiper container */
   .mySwiper-category-1 .swiper-slide {
     width: 100% !important;
     min-width: 100% !important;
     max-width: 100% !important;
+    height: 100% !important;
     flex: 0 0 100% !important;
     flex-shrink: 0 !important;
     box-sizing: border-box !important;
@@ -1023,14 +1058,15 @@ body {
     padding: 0 !important;
   }
 
-  /* Banner image div: adapt to image aspect ratio (1680x480), no cropping */
+  /* Banner image div: fills the swiper container's height (set by aspect-ratio on parent).
+     Both slides use height:100% — no per-slide variation possible. */
   .mySwiper-category-1 .swiper-slide .banner-bg-image {
     width: 100% !important;
-    height: auto !important;
-    min-height: unset !important;
-    aspect-ratio: 1680 / 480 !important;
+    height: 100% !important;
+    min-height: 100% !important;
     box-sizing: border-box !important;
-    padding: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
